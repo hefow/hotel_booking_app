@@ -60,12 +60,87 @@ export const login =async (req,res)=>{
    })
 }
 
-export const userProfile =async (req,res)=>{
-   const user = await User.findById(req._id)
-   if(!user){
-      return res.status(404).json({
-         message:"User Not Found"
-      })
+// Get user profile
+export const getProfile = async (req, res) => {
+   try {
+     const user = await User.findById(req.user._id);
+ 
+     if (!user) {
+       return res.status(404).json({ message: "User not found" });
+     }
+ 
+     res.json({
+       id: user._id,
+       firstName: user.firstName,
+       lastName: user.lastName,
+       email: user.email,
+       role: user.role,
+     });
+   } catch (error) {
+     res.status(500).json({ message: "Server error", error: error.message });
    }
-   res.status(200).json(user)
-}
+ };
+ 
+ //get all users
+ export const getAllUsers = async (req, res) => {
+    try {
+      const users = await User.find().select('-password'); // Exclude password field
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
+  
+ 
+ // Update user
+ export const updateUser = async (req, res) => {
+   const { firstName, lastName, email, role } = req.body;
+ 
+   try {
+     const user = await User.findById(req.params.id);
+ 
+     if (!user) {
+       return res.status(404).json({ message: "User not found" });
+     }
+ 
+     user.firstName = firstName || user.firstName;
+     user.lastName = lastName || user.lastName;
+     user.email = email || user.email;
+ 
+     if (req.user.role === "admin" && role) {
+       user.role = role;
+     }
+ 
+     const updatedUser = await user.save();
+ 
+     res.json({
+       message: "User updated successfully",
+       user: {
+         id: updatedUser._id,
+         firstName: updatedUser.firstName,
+         lastName: updatedUser.lastName,
+         email: updatedUser.email,
+         role: updatedUser.role,
+       },
+     });
+   } catch (error) {
+     res.status(500).json({ message: "Server error", error: error.message });
+   }
+ };
+ 
+ // Delete user
+ export const deleteUser = async (req, res) => {
+   try {
+     const user = await User.findById(req.params.id);
+ 
+     if (!user) {
+       return res.status(404).json({ message: "User not found" });
+     }
+ 
+     await user.deleteOne();
+     res.json({ message: "User deleted successfully" });
+   } catch (error) {
+     res.status(500).json({ message: "Server error", error: error.message });
+   }
+ };
