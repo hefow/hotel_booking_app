@@ -30,7 +30,7 @@ const generateToken = (id) => {
  }
 
 //get hotel
- export const getHotel = async (req, res) => {
+ export const getHotels = async (req, res) => {
    try {
      const hotel = await Hotel.find();
      if (!hotel) {
