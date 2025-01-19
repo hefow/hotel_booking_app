@@ -1,9 +1,9 @@
 import express from 'express'
-import { addHotel, getHotel } from '../controllers/hotelController.js'
+import { addHotel, getHotels } from '../controllers/hotelController.js'
 
 const router =express.Router();
 
 router.post("/addhotel",addHotel)
-router.get("/", getHotel)
+router.get("/", getHotels)
 
 export default router

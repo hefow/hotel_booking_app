@@ -13,6 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   carousel_slider: ^5.0.0 # Added carousel_slider for sliding images
 
+  http: ^1.2.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

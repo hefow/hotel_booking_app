@@ -11,7 +11,7 @@ const hotelSchema = new mongoose.Schema({
    totalRooms: { type: Number, required: true },
    availableRooms: { type: Number, required: true },
    createdAt: { type: Date, default: Date.now },
-   updatedAt: { type: Date }
+   updatedAt: { type: Date, default: Date.now  }
  });
  
  const Hotel = mongoose.model('Hotel', hotelSchema);
