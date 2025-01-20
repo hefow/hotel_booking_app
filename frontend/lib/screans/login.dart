@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screans/hotels.dart';
 import 'package:frontend/screans/onboarding.dart';
 import 'package:frontend/services/auth_service.dart';
 
@@ -22,10 +21,10 @@ class _LoginState extends State<Login> {
         final response = await _authService.login(
             _emailController.text, _passwordController.text);
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("login seccessfully...")));
+            .showSnackBar(const SnackBar(content: Text("login seccessfully...")));
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("invalid username or password..")));
+            const SnackBar(content: Text("invalid username or password..")));
       }
     }
   }
@@ -138,7 +137,7 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Onboarding()));
+                                  builder: (context) => const Onboarding()));
                         }
                       },
                       style: ElevatedButton.styleFrom(

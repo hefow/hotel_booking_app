@@ -6,9 +6,9 @@ export const addRoom = async (req, res) => {
    try {
      const { hotelId, roomNumber, type, price, amenities, description } = req.body;
  
-     const hotel = await Hotel.findById(hotelId);
-     if (!hotel) {
-       return res.status(404).json({ message: 'Hotel not found' });
+     const room = await Hotel.findById(roomNumber);
+     if (!room) {
+       return res.status(404).json({ message: 'room not found' });
      }
  
      const newRoom = new Room({

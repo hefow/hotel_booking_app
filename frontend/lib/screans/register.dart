@@ -36,7 +36,7 @@ class _RegisterState extends State<Register> {
 
         // Navigate to login or dashboard screen
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Login()));
+            context, MaterialPageRoute(builder: (context) => const Login()));
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: $e')),

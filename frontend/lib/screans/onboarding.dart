@@ -13,7 +13,7 @@ class Onboarding extends StatelessWidget {
           Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.6,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   '/assets/images/onboard.jpg',
@@ -33,7 +33,7 @@ class Onboarding extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Explore a World\nOf options .',
                   style: TextStyle(
                     fontSize: 28,
@@ -42,7 +42,7 @@ class Onboarding extends StatelessWidget {
                     height: 1.2,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'Discover Wide range of hotels at your fingertips.\nOur App has variety of options to suit your needs\nand budgets',
                   style: TextStyle(
@@ -51,8 +51,8 @@ class Onboarding extends StatelessWidget {
                     height: 1.5,
                   ),
                 ),
-                SizedBox(height: 32),
-                Container(
+                const SizedBox(height: 32),
+                SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
@@ -60,13 +60,13 @@ class Onboarding extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          Color(0xFF4B5EFC), // Blue color from the image
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                          const Color(0xFF4B5EFC), // Blue color from the image
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Get Started',
                       style: TextStyle(
                         fontSize: 18,

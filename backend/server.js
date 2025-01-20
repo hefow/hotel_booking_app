@@ -3,6 +3,7 @@ import connectDb from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import hotelRoutes from './routes/hotelRoutes.js'
 import cors from 'cors'
+import roomRoutes from "./routes/roomRoutes.js"
 
 const app =express()
 const port= process.env.port || 5000
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/api/users",authRoutes)
 app.use("/api/hotels",hotelRoutes)
+app.use("/api/rooms",roomRoutes)
 
 app.get("/",(req,res)=>{
    res.send("<h1>Welcome to hotel booking server</h1>")

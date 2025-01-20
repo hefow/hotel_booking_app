@@ -1,24 +1,25 @@
-import jwt from 'jsonwebtoken'
 import Hotel from '../models/hotelModel.js';
-
-const generateToken = (id) => {
-   return jwt.sign({ id}, process.env.JWT_SECRET, {
-     expiresIn: '1d',
-   });
- };
+import fs from 'fs'
 
  export const addHotel = async (req,res)=>{
-   const {name,location,description,pricePerNight,amenities,rating,photos,totalRooms,availableRooms}=req.body
+   const {name,location,description,amenities,rating,totalRooms,availableRooms}=req.body
+
+   // Read the uploaded file
+   const image = req.file
+   ? {
+       data: fs.readFileSync(req.file.path),
+       contentType: req.file.mimetype,
+     }
+   : null;
 
    const existHotel=await Hotel.findOne({name})
    if(existHotel){
       return res.status(403).json({message:"This hotel already exist."})
    }
 
-   const hotel=await Hotel.create({name,location,description,pricePerNight,amenities,rating,photos,totalRooms,availableRooms});
+   const hotel=await Hotel.create({name,location,description,amenities,rating,image,totalRooms,availableRooms});
 
    res.status(200).json({
-      token: generateToken(hotel._id),
       hotel:{
          _id: hotel._id,
          name:hotel.name,
