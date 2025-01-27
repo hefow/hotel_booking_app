@@ -5,7 +5,7 @@ class AuthService {
   final String baseUrl = 'http://192.168.1.18:5000/api/users/';
 
   Future<Map<String, dynamic>> registerUser(String name, String email,
-      String password, String phone, String role) async {
+      String password) async {
     final url = Uri.parse('$baseUrl/register');
     final response = await http.post(
       url,
@@ -13,9 +13,7 @@ class AuthService {
       body: json.encode({
         'name': name,
         'email': email,
-        'password': password,
-        'phone': phone,
-        'role': role,
+        'password': password
       }),
     );
 

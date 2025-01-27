@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screans/onboarding.dart';
+import 'package:frontend/screans/home.dart';
 import 'package:frontend/services/auth_service.dart';
 
 class Login extends StatefulWidget {
@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Onboarding()));
+                                  builder: (context) => const HotelSearchPage()));
                         }
                       },
                       style: ElevatedButton.styleFrom(

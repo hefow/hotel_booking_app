@@ -15,9 +15,7 @@ class _RegisterState extends State<Register> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _phoneController = TextEditingController();
-  String? _selectedRole = 'customer'; // Default role
-
+  
   void _register() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -26,8 +24,6 @@ class _RegisterState extends State<Register> {
           _nameController.text,
           _emailController.text,
           _passwordController.text,
-          _phoneController.text,
-          _selectedRole!,
         );
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -125,42 +121,7 @@ class _RegisterState extends State<Register> {
                     validator: (value) =>
                         value!.isEmpty ? 'Please enter your email' : null,
                   ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _phoneController,
-                    decoration: InputDecoration(
-                      labelText: 'Phone',
-                      filled: true,
-                      fillColor: Colors.grey[50],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  // Hidden dropdown but maintaining functionality
-                  Opacity(
-                    opacity: 1,
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedRole,
-                      decoration: const InputDecoration(
-                          fillColor: Colors.grey, labelText: 'Role'),
-                      items: const [
-                        DropdownMenuItem(
-                            value: 'customer', child: Text('Customer')),
-                        DropdownMenuItem(value: 'admin', child: Text('Admin')),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedRole = value;
-                        });
-                      },
-                      validator: (value) =>
-                          value == null ? 'Please select a role' : null,
-                    ),
-                  ),
+          
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,

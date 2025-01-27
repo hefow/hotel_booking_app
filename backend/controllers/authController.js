@@ -40,13 +40,15 @@ export const login =async (req,res)=>{
    const {email,password}=req.body
 
    const user=await User.findOne({email})
+   if (!user) {
+    return res.status(401).json({ message: "Invalid email" });
+  }
    const isMatch=await user.comparePassword(password)
-
    if(!isMatch){
-      return res.status(401).json({
-         message:"invalid email or password"
-      })
-   }
+    return res.status(401).json({
+      message:"invalid email or password"
+    })
+  }
    res.json({
       token: generateToken(user._id),
       user:{

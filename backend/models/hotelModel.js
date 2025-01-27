@@ -6,6 +6,7 @@ const hotelSchema = new mongoose.Schema({
    description: { type: String },
    amenities: [String], 
    rating: { type: Number, min: 0, max: 5 },
+   pricePerNight: { type: Number, required: true },
    image: {
     data: Buffer,
     contentType: String,
