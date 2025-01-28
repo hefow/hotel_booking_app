@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HotelSearchPage()));
+                                  builder: (context) => const Home()));
                         }
                       },
                       style: ElevatedButton.styleFrom(

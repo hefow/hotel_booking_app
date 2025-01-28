@@ -71,6 +71,47 @@ export const addHotel = async (req, res) => {
    }
  };
 
+
+ // Search hotels by location and price range
+export const searchHotels = async (req, res) => {
+  try {
+    const { location, minPrice, maxPrice } = req.query; // Get search params from query
+
+    // Initialize the query object
+    let query = {};
+
+    // Apply location filter if provided
+    if (location) {
+      query.location = { $regex: location, $options: "i" }; // Case-insensitive search for location
+    }
+
+    // Apply price range filter if provided
+    if (minPrice || maxPrice) {
+      query.pricePerNight = {};
+
+      if (minPrice) {
+        query.pricePerNight.$gte = parseFloat(minPrice); // Greater than or equal to minPrice
+      }
+
+      if (maxPrice) {
+        query.pricePerNight.$lte = parseFloat(maxPrice); // Less than or equal to maxPrice
+      }
+    }
+
+    // Fetch hotels based on the query
+    const hotels = await Hotel.find(query);
+
+    if (!hotels.length) {
+      return res.status(404).json({ message: "No hotels found matching your search criteria" });
+    }
+
+    res.status(200).json(hotels); // Return the filtered hotels
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching hotels', error });
+  }
+};
+
+//get hotel by id
  export const getHotelById = async (req,res)=>{
   
   try {

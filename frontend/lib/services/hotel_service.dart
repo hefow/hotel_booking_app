@@ -26,6 +26,31 @@ class HotelService {
     }
   }
 
+   // Search hotels by location or price range
+  Future<List<dynamic>> searchHotels({String? location, double? minPrice, double? maxPrice}) async {
+    try {
+      final queryParameters = {
+        if (location != null && location.isNotEmpty) 'location': location,
+        if (minPrice != null) 'minPrice': minPrice.toString(),
+        if (maxPrice != null) 'maxPrice': maxPrice.toString(),
+      };
+
+      final response = await http.get(
+        Uri.parse('$apiUrl/search')
+          .replace(queryParameters: queryParameters),
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to load hotels');
+      }
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
 }
 
 
