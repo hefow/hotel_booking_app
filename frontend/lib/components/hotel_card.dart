@@ -249,36 +249,34 @@
 // // }
 
 import 'package:flutter/material.dart';
-import 'package:frontend/components/hotel_controller.dart';
+
 import 'package:frontend/screans/hotels.dart';
 import 'package:get/get.dart';
 
 class HotelCard extends StatelessWidget {
-  final String imageUrl;
-  final String title;
+  final String image;
+  final String name;
   final String location;
-  final String price;
+  final String pricePerNight;
+  final String id;
 
   const HotelCard({
     super.key,
-    required this.imageUrl,
-    required this.title,
+    required this.image,
+    required this.name,
     required this.location,
-    required this.price,
+    required this.pricePerNight,
+    required this.id
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         // Navigate to HotelDetail page and pass hotel details
-        Get.find<HotelController>().setHotelDetails({
-          'title': title,
-          'imageUrl': imageUrl,
-          'location': location,
-          'price': price,
-        });
-        Get.to(() => const HotelsDetail());
+        Get.to(() => HotelsDetail(
+              id: id,
+            ));
       },
       child: Container(
         width: 300,
@@ -306,7 +304,7 @@ class HotelCard extends StatelessWidget {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(20)),
                   child: Image.network(
-                    imageUrl,
+                    image,
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -338,7 +336,7 @@ class HotelCard extends StatelessWidget {
                 children: [
                   // Title
                   Text(
-                    title,
+                    name,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -369,7 +367,7 @@ class HotelCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            price,
+                            pricePerNight,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

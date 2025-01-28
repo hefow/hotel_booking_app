@@ -14,4 +14,19 @@ class HotelService {
       throw Exception('Failed to load hotels');
     }
   }
+   // Fetch hotel by ID
+  Future<Map<String, dynamic>> fetchHotelById(String id) async {
+    final response = await http.get(Uri.parse('$apiUrl/$id'));
+
+    if (response.statusCode == 200) {
+      // return json.decode(response.body);
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception('Failed to load hotel');
+    }
+  }
+
 }
+
+
+

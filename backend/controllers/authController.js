@@ -1,12 +1,7 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js'
+import { JWT_SECRET } from '../config/config.js'
 
-
-const generateToken = (id) => {
-   return jwt.sign({ id}, process.env.JWT_SECRET, {
-     expiresIn: '30d',
-   });
- };
 
 export const registerUser =async (req,res)=>{
    try{
@@ -20,7 +15,6 @@ export const registerUser =async (req,res)=>{
       const user=await User.create({name,email,password,phone,role})
 
       res.status(201).json({
-         token: generateToken(user._id),
          user:{
             _id: user._id,
             name:user.name,
@@ -46,20 +40,19 @@ export const login =async (req,res)=>{
    const isMatch=await user.comparePassword(password)
    if(!isMatch){
     return res.status(401).json({
-      message:"invalid email or password"
+      message:"invalid password"
     })
   }
-   res.json({
-      token: generateToken(user._id),
-      user:{
-         _id: user._id,
-         name:user.name,
-         email:user.email,
-         password:user.password,
-         role:user.role,
-         phone:user.phone
-      }
-   })
+  // token generation
+  const expiresIn= 30 *24*60*60 //30 days
+
+  const token = jwt.sign({_id:user._id},JWT_SECRET,{ expiresIn})
+
+  res.cookie('token',token,{httpOnly:true,secure:false,maxAge:expiresIn* 1000})
+
+  user.password=undefined
+
+   res.status(200).send({...user.toJSON(),expiresIn})
 }
 
 // Get user profile

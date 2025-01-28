@@ -8,8 +8,8 @@ const hotelSchema = new mongoose.Schema({
    rating: { type: Number, min: 0, max: 5 },
    pricePerNight: { type: Number, required: true },
    image: {
-    data: Buffer,
-    contentType: String,
+    type:String,
+    default: null
   },
    totalRooms: { type: Number, required: true },
    availableRooms: { type: Number, required: true },

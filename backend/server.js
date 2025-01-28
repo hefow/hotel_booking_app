@@ -4,11 +4,13 @@ import authRoutes from './routes/authRoutes.js'
 import hotelRoutes from './routes/hotelRoutes.js'
 import cors from 'cors'
 import roomRoutes from "./routes/roomRoutes.js"
+import cookieParser from 'cookie-parser'
+import { port } from './config/config.js'
 
 const app =express()
-const port= process.env.port || 5000
+const Port= port || 5000
 connectDb()
-
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
