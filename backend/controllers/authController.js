@@ -52,7 +52,7 @@ export const login =async (req,res)=>{
 
   user.password=undefined
 
-   res.status(200).send({...user.toJSON(),expiresIn})
+   res.status(200).send({...user.toJSON(),expiresIn,token})
 }
 
 // Get user profile

@@ -3,8 +3,8 @@ import User from '../models/userModel.js'
 import {JWT_SECRET} from '../config/config.js'
 
 export const protect = async (req,res,next)=>{
-   const token= req.headers.Authentication?.split(" ")[1]
-   console.log(token)
+   const token= req.cookies.token
+
    if(!token){ 
       return res.status(401).json({message: "Not Authorized"})
    }

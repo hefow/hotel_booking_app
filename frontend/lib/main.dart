@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screans/home.dart';
+import 'package:frontend/screans/booking.dart';
+import 'package:frontend/screans/login.dart';
 import 'package:get/get.dart';
 import 'package:frontend/components/hotel_controller.dart';
 
@@ -31,8 +32,7 @@ void main() {
       initialBinding: BindingsBuilder(() {
         Get.put(HotelController()); // Register the controller
       }),
-      home: const Home(), // Or your initial page
+      home: Login(), // Or your initial page
     ),
   );
 }
-

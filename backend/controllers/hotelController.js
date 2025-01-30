@@ -60,6 +60,7 @@ export const addHotel = async (req, res) => {
 //get hotel
  export const getHotels = async (req, res) => {
    try {
+
      const hotel = await Hotel.find();
      if (!hotel) {
        return res.status(404).json({ message: 'Hotels not found' });

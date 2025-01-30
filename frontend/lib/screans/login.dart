@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screans/home.dart';
+import 'package:frontend/screans/bottom_navigation.dart';
+import 'package:frontend/screans/register.dart';
 import 'package:frontend/services/auth_service.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,16 +18,53 @@ class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // void _login() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     try {
+  //       final response = await _authService.login(
+  //           _emailController.text, _passwordController.text);
+
+  //       Get.to(() => BottomNavigation());
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text("login seccessfully...")));
+
+  //     } catch (error) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text("invalid username or password..")));
+  //     }
+  //   }
+  // }
+
   void _login() async {
     if (_formKey.currentState!.validate()) {
       try {
         final response = await _authService.login(
             _emailController.text, _passwordController.text);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("login seccessfully...")));
+
+        // Check if the response contains a token
+        if (response != null && response['token'] != null) {
+          // Store token in SharedPreferences
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('token', response['token']);
+
+          // Navigate to BottomNavigation
+          Get.to(() => BottomNavigation());
+
+          // Show login success message after navigation
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Login successful...")),
+          );
+        } else {
+          // Handle case where token is not returned
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Login failed, no token returned")),
+          );
+        }
       } catch (error) {
+        // Handle error, show error message
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("invalid username or password..")));
+          SnackBar(content: Text("Error: $error")),
+        );
       }
     }
   }
@@ -134,10 +174,7 @@ class _LoginState extends State<Login> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           // Handle login
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Home()));
+                          _login();
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -168,6 +205,24 @@ class _LoginState extends State<Login> {
                         fontSize: 14,
                       ),
                     ),
+                  ),
+                  Row(
+                    children: [
+                      const Center(
+                        child: Text(
+                          'if you do not have acount',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Get.to(() => Register());
+                          },
+                          child: Text("register?"))
+                    ],
                   ),
                   const SizedBox(height: 24),
 

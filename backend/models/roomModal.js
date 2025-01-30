@@ -7,7 +7,10 @@ const roomSchema = new mongoose.Schema({
   price: { type: Number, required: true }, 
   isAvailable: { type: Boolean, default: true }, 
   amenities: { type: [String], default: [] }, 
-  photos: [String], 
+  image: {
+    type:String,
+    default: null
+  }, 
   description: { type: String }, 
   createdAt: { type: Date, default: Date.now }, 
 });

@@ -115,21 +115,6 @@ class _HomeState extends State<Home> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 40,
-        currentIndex: 0,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.book_online_outlined,
-              ),
-              label: 'Booking'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
     );
   }
 

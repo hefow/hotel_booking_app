@@ -6,6 +6,7 @@ import cors from 'cors'
 import roomRoutes from "./routes/roomRoutes.js"
 import cookieParser from 'cookie-parser'
 import { port } from './config/config.js'
+import bookingRoutes from './routes/bookingRoutes.js'
 
 const app =express()
 const Port= port || 5000
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended:true}));
 app.use("/api/users",authRoutes)
 app.use("/api/hotels",hotelRoutes)
 app.use("/api/rooms",roomRoutes)
+app.use("/api/book",bookingRoutes)
 
 app.get("/",(req,res)=>{
    res.send("<h1>Welcome to hotel booking server</h1>")
