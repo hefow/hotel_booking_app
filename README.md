@@ -38,10 +38,12 @@ The **Hotel Management and Booking System** is a web and mobile application that
    cd hotel-booking-app/backend
 2.npm install
 ### Frontend Setup (Flutter)
-   1.git clone https://github.com/hefow/hotel-booking-app.git
+ 1.clone repo
+   ```bash
+   git clone https://github.com/hefow/hotel-booking-app.git
       cd hotel-booking-app/frontend
-   2.flutter pub get
-   3.flutter run
+      flutter pub get
+      flutter run
 
    
 
