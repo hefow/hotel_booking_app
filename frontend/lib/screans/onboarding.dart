@@ -62,7 +62,7 @@ class Onboarding extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         // Add navigation logic here
-                        Get.to(const Login());
+                        Get.to(() => Login());
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(

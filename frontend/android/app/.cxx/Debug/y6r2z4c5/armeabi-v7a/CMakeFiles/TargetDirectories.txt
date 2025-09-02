@@ -1,0 +1,2 @@
+/home/ahmed/projects/hotel_booking_app/frontend/android/app/.cxx/Debug/y6r2z4c5/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/ahmed/projects/hotel_booking_app/frontend/android/app/.cxx/Debug/y6r2z4c5/armeabi-v7a/CMakeFiles/rebuild_cache.dir

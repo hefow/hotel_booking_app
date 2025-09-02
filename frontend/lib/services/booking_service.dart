@@ -8,7 +8,7 @@ class BookingService {
   // Add a new booking
   Future<Booking> addBooking(Booking booking) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/bookings'),
+      Uri.parse('$baseUrl/booking'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode(booking.toJson()),
     );
@@ -22,7 +22,7 @@ class BookingService {
 
   // Get all bookings
   Future<List<Booking>> getBookings() async {
-    final response = await http.get(Uri.parse('$baseUrl/bookings'));
+    final response = await http.get(Uri.parse('$baseUrl'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);

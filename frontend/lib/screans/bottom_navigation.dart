@@ -14,7 +14,12 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
-  List<Widget> screans = [const Home(), Booking(), const HotelSearchPage(), const Profile()];
+  List<Widget> screans = [
+    const Home(),
+    const Booking(),
+    const HotelSearchPage(),
+    const Profile()
+  ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -26,7 +31,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Scaffold(
       body: screans[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 40,
+        iconSize: 30,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,

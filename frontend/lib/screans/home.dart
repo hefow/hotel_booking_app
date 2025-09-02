@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/hotel_controller.dart'; // Import the controller
 import 'package:frontend/screans/hotels.dart';
+import 'package:frontend/services/room_service.dart';
 import 'package:get/get.dart';
 import 'package:frontend/components/hotel_card.dart';
 import 'package:frontend/services/hotel_service.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    hotels = HotelService().fetchHotels();
+    hotels = RoomService().fetchRooms();
     searchController.addListener(_filterHotels);
   }
 
@@ -39,7 +40,6 @@ class _HomeState extends State<Home> {
   }
 
   void _onHotelCardTap(Map<String, dynamic> hotel) {
-    print(hotel['_id']);
     Get.to(() => HotelsDetail(id: hotel['_id'])); // Pass hotel ID
   }
 
@@ -99,11 +99,11 @@ class _HomeState extends State<Home> {
                         onTap: () => _onHotelCardTap(hotel),
                         child: HotelCard(
                           id: hotel['_id'],
-                          image: hotel['image'] ??
+                          image: hotel['image'][0] ??
                               'https://via.placeholder.com/150',
-                          name: hotel['name'],
-                          location: hotel['location'],
-                          pricePerNight: '\$${hotel['pricePerNight']}',
+                          roomNumber: hotel['roomNumber'],
+                          type: hotel['type'],
+                          price: '\$${hotel['price']}',
                         ),
                       );
                     },

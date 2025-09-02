@@ -255,17 +255,17 @@ import 'package:get/get.dart';
 
 class HotelCard extends StatelessWidget {
   final String image;
-  final String name;
-  final String location;
-  final String pricePerNight;
+  final String roomNumber;
+  final String type;
+  final String price;
   final String id;
 
   const HotelCard({
     super.key,
     required this.image,
-    required this.name,
-    required this.location,
-    required this.pricePerNight,
+    required this.roomNumber,
+    required this.type,
+    required this.price,
     required this.id
   });
 
@@ -336,7 +336,7 @@ class HotelCard extends StatelessWidget {
                 children: [
                   // Title
                   Text(
-                    name,
+                    roomNumber,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -356,7 +356,7 @@ class HotelCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            location,
+                            type,
                             style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 14,
@@ -367,7 +367,7 @@ class HotelCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            pricePerNight,
+                            price,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

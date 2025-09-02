@@ -18,22 +18,6 @@ class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // void _login() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     try {
-  //       final response = await _authService.login(
-  //           _emailController.text, _passwordController.text);
-
-  //       Get.to(() => BottomNavigation());
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //           const SnackBar(content: Text("login seccessfully...")));
-
-  //     } catch (error) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //           const SnackBar(content: Text("invalid username or password..")));
-  //     }
-  //   }
-  // }
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
@@ -42,13 +26,13 @@ class _LoginState extends State<Login> {
             _emailController.text, _passwordController.text);
 
         // Check if the response contains a token
-        if (response != null && response['token'] != null) {
+        if (response['token'] != null) {
           // Store token in SharedPreferences
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('token', response['token']);
 
           // Navigate to BottomNavigation
-          Get.to(() => BottomNavigation());
+          Get.to(() => const BottomNavigation());
 
           // Show login success message after navigation
           ScaffoldMessenger.of(context).showSnackBar(
@@ -197,15 +181,7 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 24),
 
                   // Social Login Text
-                  const Center(
-                    child: Text(
-                      'Login with Google and Facebook',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
+
                   Row(
                     children: [
                       const Center(
@@ -219,75 +195,9 @@ class _LoginState extends State<Login> {
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.to(() => Register());
+                            Get.to(() => const Register());
                           },
-                          child: Text("register?"))
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Social Login Buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Facebook Button
-                      OutlinedButton(
-                        onPressed: () {
-                          // Handle Facebook login
-                        },
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          side: const BorderSide(color: Colors.grey),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 12,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.facebook, color: Colors.blue[600]),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Facebook',
-                              style: TextStyle(color: Colors.black87),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-
-                      // Google Button
-                      OutlinedButton(
-                        onPressed: () {
-                          // Handle Google login
-                        },
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          side: const BorderSide(color: Colors.grey),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 12,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Image.network(
-                              'https://image.similarpng.com/very-thumbnail/2020/06/Logo-google-icon-PNG.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Google',
-                              style: TextStyle(color: Colors.black87),
-                            ),
-                          ],
-                        ),
-                      ),
+                          child: const Text("register?"))
                     ],
                   ),
                 ],

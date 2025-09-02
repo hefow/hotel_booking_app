@@ -1,0 +1,1 @@
+/home/ahmed/projects/hotel_booking_app/frontend/build/app/intermediates/cxx/Debug/y6r2z4c5/obj/x86

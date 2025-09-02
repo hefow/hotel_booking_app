@@ -115,9 +115,9 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
                             id: hotel['_id'], // Pass hotel ID
                             image: hotel['image'] ??
                                 'https://via.placeholder.com/150',
-                            name: hotel['name'],
-                            location: hotel['location'],
-                            pricePerNight: '\$${hotel['pricePerNight']}',
+                            roomNumber: hotel['name'],
+                            type: hotel['location'],
+                            price: '\$${hotel['pricePerNight']}',
                           ),
                       ],
                     ),

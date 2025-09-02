@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelService {
-  static const String apiUrl = 'http://10.0.2.2:5000/api/hotels';
+  static const String apiUrl = 'http://192.168.1.18:5000/api/rooms';
 
-  // Fetch hotels from the backend
+  // Fetch rooms from the backend
   Future<List<dynamic>> fetchHotels() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
-     if (token == null) {
+    if (token == null) {
       print("You need to login first.");
       return [];
     }
@@ -29,7 +29,7 @@ class HotelService {
     } else {
       throw Exception('Failed to load hotels');
     }
-    }
+  }
 //   Future<void> fetchHotels() async {
 //   SharedPreferences prefs = await SharedPreferences.getInstance();
 //   final token = prefs.getString('token');
@@ -56,7 +56,7 @@ class HotelService {
 //     print("Error fetching hotels: ${response.body}");
 //   }
 // }
-   // Fetch hotel by ID
+  // Fetch hotel by ID
   Future<Map<String, dynamic>> fetchHotelById(String id) async {
     final response = await http.get(Uri.parse('$apiUrl/$id'));
 
@@ -68,28 +68,28 @@ class HotelService {
     }
   }
 
-    // Search hotels by location or price range
-    Future<List<dynamic>> searchHotels(
-        {String? location, double? minPrice, double? maxPrice}) async {
-      try {
-        final queryParameters = {
-          if (location != null && location.isNotEmpty) 'location': location,
-          if (minPrice != null) 'minPrice': minPrice.toString(),
-          if (maxPrice != null) 'maxPrice': maxPrice.toString(),
-        };
+  // Search hotels by location or price range
+  Future<List<dynamic>> searchHotels(
+      {String? location, double? minPrice, double? maxPrice}) async {
+    try {
+      final queryParameters = {
+        if (location != null && location.isNotEmpty) 'location': location,
+        if (minPrice != null) 'minPrice': minPrice.toString(),
+        if (maxPrice != null) 'maxPrice': maxPrice.toString(),
+      };
 
-        final response = await http.get(
-          Uri.parse('$apiUrl/search').replace(queryParameters: queryParameters),
-        );
+      final response = await http.get(
+        Uri.parse('$apiUrl/search').replace(queryParameters: queryParameters),
+      );
 
-        if (response.statusCode == 200) {
-          return jsonDecode(response.body);
-        } else {
-          throw Exception('Failed to load hotels');
-        }
-      } catch (e) {
-        print(e);
-        rethrow;
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to load hotels');
       }
+    } catch (e) {
+      print(e);
+      rethrow;
     }
   }
+}
